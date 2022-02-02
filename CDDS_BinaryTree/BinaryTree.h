@@ -1,6 +1,5 @@
 #ifndef _BINARYTREE_H_
 #define _BINARYTREE_H_
-
 #pragma once
 template<typename T>
 class TreeNode;
@@ -45,9 +44,151 @@ private:
 	/// <returns>Whether or not a node matching the value could be found</returns>
 	bool findNode(T searchValue, TreeNode<T>*& nodeFound, TreeNode<T>*& nodeParent);
 
-	void draw(TreeNode<T>*, int x, int y, int horizontalSpacing, TreeNode<T>* selected = nullptr);
+	void draw(TreeNode<T>* currentNode, int x, int y, int horizontalSpacing, TreeNode<T>* selected = nullptr);
 
 	TreeNode<T>* m_root = nullptr;
 };
 
 #endif
+
+template<typename T>
+inline BinaryTree<T>::BinaryTree()
+{
+}
+
+template<typename T>
+inline BinaryTree<T>::~BinaryTree()
+{
+	delete m_root;
+}
+
+template<typename T>
+inline bool BinaryTree<T>::isEmpty() const
+{
+	//if m_roots left and right are nullptr which is null...
+	if (m_root->getLeft && m_root->getRight == nullptr)
+		return true;//...return true
+	return false;//...if not false
+}
+
+template<typename T>
+inline void BinaryTree<T>::insert(T value)
+{
+	if (m_root->hasLeft = false)
+	{
+
+	}
+	if (m_root->hasRight = false)
+	{
+
+	}
+	if (m_root->hasLeft && m_root->hasLeft = false)
+	{
+
+	}
+}
+
+template<typename T>
+inline void BinaryTree<T>::remove(T value)
+{
+	//iterates through the left
+	if (m_root->hasLeft = true)
+	{
+		//if you have to go right on the tree
+		for (int i = m_root->getLeft.getData; i != value; i++)
+		{
+			//check to see if the value is i
+			if (i == value)
+			{
+				//set i to value if yes
+				i = value;
+				delete i;//delete i
+			}
+		}
+	}
+	//iterates through the right
+	if (m_root->hasRight = true)
+	{
+		//if you have to go left
+		for (int i = m_root->getRight.getData; i != value; i++)
+		{
+			//check to see if the value is i
+			if (i == value)
+			{
+				//set i to value if yes
+				i = value;
+				delete i;//delete i
+			}
+		}
+	}
+	//iterats between the left and the right m_root
+	if (m_root->hasLeft&& m_root->hasLeft = true)
+	{
+		//if you have to go left
+		for (int i = m_root->getRight.getData; i != value; i++)
+		{
+			for(int c = m_root->hasLeft.getData; i != value; c++)
+			//check to see if the value is i
+			if (i == value)
+			{
+				//set i to value if yes
+				i = value;
+				delete i;//delete i
+			}
+		}
+
+	}
+}
+
+template<typename T>
+inline TreeNode<T>* BinaryTree<T>::find(T value)
+{
+	//gets the m_roots data and makes it i then compares i to the value.
+	//
+	for (int i = m_root->getData; i != value;)
+		if(i == value)//if i is value then... 
+			return  value;//...return value
+}
+
+//this needs to be worked on
+template<typename T>
+inline void BinaryTree<T>::draw(TreeNode<T>* selected)
+{
+	
+}
+
+//this needs to be worked on
+template<typename T>
+inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, TreeNode<T>*& nodeParent)
+{
+	return false;
+}
+
+template<typename T>
+inline void BinaryTree<T>::draw(TreeNode<T>* currentNode, int x, int y, int horizontalSpacing, TreeNode<T>* selected)
+{
+	//Decrease the horizontal space as the nodes draw
+	horizontalSpacing /= 2;
+
+	//check if the current node is null
+	if (currentNode) 
+	{
+		//Draws the left child if this node has one
+		if (currentNode->hasLeft())
+		{
+			//Draws a line between th left child and the current node
+			DrawLine(x, y, x - horizontalSpacing, y + 80, RED);
+			//Draws the left child
+			draw(currentNode->getLeft(), x - horizontalSpacing, y + 80, horizontalSpacing, selected);
+		}
+		//Draws the Right child if this node has one
+		if (currentNode->hasRight())
+		{
+			//Draws a line between th left child and the current node
+			DrawLine(x, y, x - horizontalSpacing, y + 80, RED);
+			//Draws the Right child
+			draw(currentNode->getRight(), x - horizontalSpacing, y + 80, horizontalSpacing, selected);
+		}
+		currentNode->draw(x,y, (selected == currentNode));
+	}
+}
