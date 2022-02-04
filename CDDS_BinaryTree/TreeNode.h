@@ -3,7 +3,7 @@ template<typename T>
 class TreeNode
 {
 public:
-	TreeNode() {};
+	TreeNode();
 	TreeNode(T value);
 	~TreeNode() {};
 
@@ -58,26 +58,40 @@ private:
 };
 
 template<typename T>
-inline TreeNode<T>::TreeNode(T value){ value = m_value; }
+inline TreeNode<T>::TreeNode()
+{
+	m_left = nullptr;
+	m_right= nullptr;
+}
+
+template<typename T>
+inline TreeNode<T>::TreeNode(T value)
+{ 
+	m_value = value; 
+	m_left = nullptr;
+	m_right = nullptr;
+}
 
 template<typename T>
 inline bool TreeNode<T>::hasLeft()
 {
-	if (m_left = nullptr)
+	if (this->getLeft() == nullptr)
 		return false;
+	
 	return true;
 }
 
 template<typename T>
 inline bool TreeNode<T>::hasRight()
 {
-	if (m_Right = nullptr)
+	if (this->getRight()  == nullptr)
 		return false;
+		
 	return true;
 }
 
 template<typename T>
-inline T TreeNode<T>::getData(){ return T(m_value); }
+inline T TreeNode<T>::getData(){ return m_value; }
 
 template<typename T>
 inline TreeNode<T>* TreeNode<T>::getLeft(){ return m_left; }
@@ -101,7 +115,7 @@ inline void TreeNode<T>::draw(int x, int y, bool selected)
 	static char buffer[10];
 
 	//Converts the value to a string and stores it in the array
-	sprintf(buffer, "%d".m_value);
+	sprintf(buffer, "%d",m_value);
 	//draws the circle to represent the node
 	DrawCircle(x, y, 30, YELLOW);
 
