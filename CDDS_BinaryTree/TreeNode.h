@@ -100,13 +100,20 @@ template<typename T>
 inline TreeNode<T>* TreeNode<T>::getRight() { return m_right; }
 
 template<typename T>
-inline void TreeNode<T>::setData(T value) { return T(m_value == value); }
+inline void TreeNode<T>::setData(T value) { return T(m_value = value); }
 
 template<typename T>
-inline void TreeNode<T>::setLeft(TreeNode<T>* node) { TreeNode<T>(m_left == node); }
+inline void TreeNode<T>::setLeft(TreeNode<T>* node)
+{
+	m_left = node;
+
+}
 
 template<typename T>
-inline void TreeNode<T>::setRight(TreeNode<T>* node) { TreeNode<T>(m_right == node); }
+inline void TreeNode<T>::setRight(TreeNode<T>* node)
+{
+	m_right = node;
+}
 
 template<typename T>
 inline void TreeNode<T>::draw(int x, int y, bool selected)

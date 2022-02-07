@@ -48,13 +48,17 @@ private:
 	void draw(TreeNode<T> * currentNode, int x, int y, int horizontalSpacing, TreeNode<T> * selected = nullptr);
 		
 	TreeNode<T>* m_root = nullptr;
+	TreeNode<T>* m_last;
 };
 
 #endif
 
 template<typename T>
 inline BinaryTree<T>::BinaryTree()
-{}
+{
+	m_root = nullptr;
+	m_last = nullptr;
+}
 
 template<typename T>
 inline BinaryTree<T>::~BinaryTree()
@@ -72,89 +76,232 @@ inline bool BinaryTree<T>::isEmpty() const
 
 template<typename T>
 inline void BinaryTree<T>::insert(T value)
-{		
-	TreeNode<T>* m_newRoot = new TreeNode<T>(value);
+{	
+	/*TreeNode<T>* m_insertRoot = new TreeNode<T>(value);
 
-	if (m_root > m_newRoot){
-		while(m_root->hasLeft())
+	if (m_root == nullptr)
+	{
+		m_root = m_insertRoot;
+		m_last = m_root;
+	}
+
+	if (m_insertRoot->getData() > m_root->getData())
+	{
+		if (m_insertRoot->getData() > m_last->getData())
 		{
-			(TreeNode<T>*)m_root->getLeft()->getData() > (TreeNode<T>*)m_newRoot;
-			if (m_root->hasLeft() == NULL)
-				m_root->getLeft() == m_newRoot;
-			insert(value);}}
-
-	if (m_root > m_newRoot){
-		while(m_root->hasRight())
+			TreeNode<T>* m_indexRoot = m_last;
+			while (m_indexRoot->getRight() != nullptr)
+			{
+				m_indexRoot = m_indexRoot->getRight();
+				if (m_insertRoot->getData() < m_indexRoot->getData())
+				{
+					m_last = m_indexRoot;
+					insert(value);
+				}
+			}
+			m_indexRoot->setRight(m_insertRoot);
+			m_last = m_insertRoot;
+		}
+		if (m_insertRoot->getData() < m_last->getData())
 		{
-			(TreeNode<T>*)m_root->getRight()->getData() > m_newRoot;
-			if (m_root->hasRight() == NULL)
-				m_root->getRight() == m_newRoot;
-			insert(value);}}
+			TreeNode<T>* m_indexRoot = m_last;
+			while (m_indexRoot->getLeft() != nullptr)
+			{
+				m_indexRoot = m_indexRoot->getLeft();
+				if (m_insertRoot->getData() > m_indexRoot->getData())
+				{
+					m_last = m_indexRoot;
+					insert(value);
+				}
+			}
+			m_indexRoot->setLeft(m_insertRoot);
+			m_last = m_insertRoot;
+		}
+	}*/
 
+
+	TreeNode<T>* m_insertRoot = new TreeNode<T>(value);
+	if (m_root == nullptr)
+	{
+		m_root = m_insertRoot;
+		m_last = m_root;
+	}
+
+	//This is to add things to the right 
+	//compared the inserRoots data to the roots data
+	//if compared is greater then go in
+	if (m_insertRoot->getData() > m_root->getData())
+	{
+		//compared the insertRoots data to the last data
+		//it it is greater go in
+		//gos right
+		if (m_insertRoot->getData() > m_last->getData())
+		{
+			//set index to m_root
+			TreeNode<T>* m_indexRoot = m_last;
+			//loop if index is not nullptr
+			if (m_indexRoot->getRight() != nullptr)
+			{
+				//set index root to index roots right
+				//m_indexRoot = m_indexRoot->getRight();
+				//if inserts roots data is greater than index roots data
+				if (m_insertRoot->getData() > m_indexRoot->getData())
+				{
+					//m_last = m_indexRoot->getRight();
+					m_last = m_indexRoot;
+					//m_indexRoot->setRight(m_insertRoot);
+					insert(value);
+				}
+
+			}
+			m_indexRoot->setRight(m_insertRoot);
+			m_last = m_insertRoot;
+			
+		}
+		//if get right is null ptr go in
+		//else
+		//{
+		//	//set the right of the m_inserRoot
+		//	m_insertRoot->setLeft(m_insertRoot);
+		//	//set last to insertRoot
+		//	m_last = m_insertRoot;
+		//}
 	
-}
+		//compared the insertRoots data to the last data
+		//it it is less go in
+		//gos left
+		if (m_insertRoot->getData() < m_last->getData())
+		{
+			//set index to m_root
+			TreeNode<T>* m_indexRoot = m_last;
+			//loop if index is not nullptr
+			if (m_indexRoot->getLeft() != nullptr)
+			{
+				//set index root to index roots right
+				//m_insertRoot = m_insertRoot->getLeft();
+				//if inserts roots data is greater than index roots data
+				if (m_insertRoot->getData() < m_indexRoot->getData())
+				{
+					//set last to index
+					m_last->setLeft(m_indexRoot);
+					//go back to insert
+					insert(value);
+				}
+			}
+			m_indexRoot->setRight(m_insertRoot);
+			m_last = m_insertRoot;
+		
+		}
+		//else
+		//{
+		//	//set the let of the m_inserRoot
+		//	m_insertRoot->setLeft(m_insertRoot);
+		//	//set last to insertRoot
+		//	m_last = m_insertRoot;
+		//}
+	}
+
+	//This is to add things to the left
+	//compared the inserRoots data to the roots data
+	//if compared is greater then go in
+	if (m_insertRoot->getData() < m_last->getData())
+	{
+		//compared the insertRoots data to the last data
+		//it it is greater go in
+		//gos right
+		if (m_insertRoot->getData() > m_last->getData())
+		{
+			//set index to m_root
+			TreeNode<T>* m_indexRoot = m_last;
+			//loop if index is not nullptr
+			while (m_indexRoot->getRight() != nullptr)
+			{
+				//set index root to index roots right
+				//m_indexRoot = m_indexRoot->getRight();
+				//if inserts roots data is greater than index roots data
+				if (m_insertRoot->getData() > m_indexRoot->getData())
+				{
+					//m_last = m_indexRoot->getRight();
+					m_last->setRight(m_indexRoot);
+					//m_indexRoot->setRight(m_insertRoot);
+					insert(value);
+				}
+			}
+			//if get left is null ptr go in
+			if (m_indexRoot->getRight() == nullptr)
+			{
+				//set the let of the m_inserRoot
+				m_indexRoot->setRight(m_insertRoot);
+				//set last to insertRoot
+				m_last = m_insertRoot;
+			}
+		}
+		//compared the insertRoots data to the last data
+		//it it is less go in
+		//gos left
+		if (m_insertRoot->getData() < m_last->getData())
+		{
+			//set index to m_root
+			TreeNode<T>* m_indexRoot = m_last;
+			//loop if index is not nullptr
+			while (m_indexRoot->getLeft() != nullptr)
+			{
+				//set index root to index roots right
+				//m_insertRoot = m_insertRoot->getLeft();
+				//if inserts roots data is greater than index roots data
+				if (m_insertRoot->getData() < m_indexRoot->getData())
+				{
+					//set last to index
+					m_last->setLeft(m_indexRoot);
+					//go back to insert
+					insert(value);
+				}
+			}
+			//if get left is null ptr go in
+			if (m_indexRoot->getLeft() == nullptr)
+			{
+				//set the let of the m_inserRoot
+				m_indexRoot->setLeft(m_insertRoot);
+				//set last to insertRoot
+				m_last = m_insertRoot;
+			}
+		}
+	}
+};
 
 
 template<typename T>
 inline void BinaryTree<T>::remove(T value)
 {
-	//iterates through the left
-	if (m_root->hasLeft() != true)
-	{
-		//if you have to go right on the tree
-		for (T i = m_root->getLeft()->getData(); i != value; i++)
-		{
-			//check to see if the value is i
-			if (i == value)
-			{
-				//set i to value if yes
-				i = value;
-				//delete i;//delete i
-			}
-		}
-	}
-	//iterates through the right
-	if (m_root->hasRight() != true)
-	{
-		//if you have to go left
-		for (T i = m_root->getRight()->getData(); i != value; i++)
-		{
-			//check to see if the value is i
-			if (i == value)
-			{
-				//set i to value if yes
-				i = value;
-				//delete i;//delete i
-			}
-		}
-	}
-	//iterats between the left and the right m_root
-	if (m_root->hasLeft() && m_root->hasLeft() != true)
-	{
-		//if you have to go left
-		for (T i = m_root->getRight()->getData(); i != value; i++)
-		{
-			for(T c = m_root->getLeft()->getData(); i != value; c++)
-			//check to see if the value is i
-			if (i == value)
-			{
-				//set i to value if yes
-				i = value;
-				//delete i;//delete i
-			}
-		}
 
-	}
 }
 
 template<typename T>
 inline TreeNode<T>* BinaryTree<T>::find(T value)
 {
 	//gets the m_roots data and makes it i then compares i to the value.
-	//
-	for (T i = m_root->getData(); i != value;)
-		if(i == value)//if i is value then... 
-			return  (TreeNode<T>*) value;//...return value
+	if (m_root->getData() > value) 
+	{
+		for (T i = m_root->getData(); i != value; i--)
+		{
+			if (i == value)//if i is value then... 
+			{
+				return  (TreeNode<T>*) value;//...return value
+			}
+		}
+	}
+
+	else if (m_root->getData() < value)
+	{
+		for (T i = m_root->getData(); i != value; i++)
+		{
+			if (i == value)//if i is value then... 
+			{
+				return  (TreeNode<T>*) value;//...return value
+			}
+		}
+	}
+	return  (TreeNode<T>*) value;
 }
 
 //this needs to be worked on
@@ -168,22 +315,22 @@ inline void BinaryTree<T>::draw(TreeNode<T>* selected)
 template<typename T>
 inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, TreeNode<T>*& nodeParent)
 {
-	while (searchValue != nodeFound)
+	while (searchValue != nodeFound->getData())
 	{
-		if (searchValue > nodeFound) {
-			nodeFound->getLeft;
+		if (searchValue > nodeFound->getData()) {
+			nodeFound->getLeft();
 			nodeParent = nodeFound;
-			nodeFound = nodeParent->getLeft;
+			nodeFound = nodeParent->getLeft();
 		}
-		if (searchValue < nodeFound) {
-			nodeFound->getRight;
+		if (searchValue < nodeFound->getData()) {
+			nodeFound->getRight();
 			nodeParent = nodeFound;
-			nodeFound = nodeParent->getRight;
+			nodeFound = nodeParent->getRight();
 		}
-		else if (searchValue == nodeFound) 
+		else if (searchValue == nodeFound->getData()) 
 		{
-			nodeParent->getLeft = nodeFound;
-			searchValue == nodeFound;
+			nodeParent->getLeft()->getData() = nodeFound->getData();
+			searchValue == nodeFound->getData();
 		}
 	}
 }
