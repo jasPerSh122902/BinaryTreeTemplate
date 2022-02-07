@@ -100,7 +100,7 @@ template<typename T>
 inline TreeNode<T>* TreeNode<T>::getRight() { return m_right; }
 
 template<typename T>
-inline void TreeNode<T>::setData(T value) { return T(m_value = value); }
+inline void TreeNode<T>::setData(T value) { return m_value = value; }
 
 template<typename T>
 inline void TreeNode<T>::setLeft(TreeNode<T>* node)
