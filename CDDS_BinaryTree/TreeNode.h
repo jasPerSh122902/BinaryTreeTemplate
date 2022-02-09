@@ -94,13 +94,24 @@ template<typename T>
 inline T TreeNode<T>::getData(){ return m_value; }
 
 template<typename T>
-inline TreeNode<T>* TreeNode<T>::getLeft(){ return m_left; }
+inline TreeNode<T>* TreeNode<T>::getLeft()
+{
+	if (hasLeft(true)) return m_left;
+	else return nullptr;
+}
 
 template<typename T>
-inline TreeNode<T>* TreeNode<T>::getRight() { return m_right; }
+inline TreeNode<T>* TreeNode<T>::getRight() 
+{
+	if (hasRight(true)) return m_right;
+	else return nullptr;
+}
 
 template<typename T>
-inline void TreeNode<T>::setData(T value) { return m_value = value; }
+inline void TreeNode<T>::setData(T value)
+{
+	m_value = value;
+}
 
 template<typename T>
 inline void TreeNode<T>::setLeft(TreeNode<T>* node)

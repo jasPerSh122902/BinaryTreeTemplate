@@ -82,75 +82,43 @@ inline void BinaryTree<T>::insert(T value)
 	if (m_root == nullptr)
 	{
 		m_root = m_insertRoot;
-		m_last = m_root;
 	}
-	//draws the buttons to the right side-------------------------------------------
-	if (m_insertRoot->getData() > m_root->getData())
+
+	bool beginSort = true;
+	TreeNode<T>* currentNode = m_root;
+
+	while (beginSort) 
 	{
-		if (m_insertRoot->getData() > m_last->getData())
+		//gets the right side-----------------------------------
+		if (m_insertRoot->getData() > currentNode->getData())
 		{
-			TreeNode<T>* m_indexRoot = m_last;
-			while (m_indexRoot->getRight() != nullptr)
+			if (currentNode->hasRight())
 			{
-				m_indexRoot = m_indexRoot->getRight();
-				if (m_insertRoot->getData() < m_indexRoot->getData())
-				{
-					m_last = m_indexRoot;
-					insert(value);
-				}
+				currentNode = currentNode->getRight();
 			}
-			m_indexRoot->setRight(m_insertRoot);
-			m_last = m_insertRoot;
+			else 
+			{
+				currentNode->setRight(m_insertRoot);
+				return;
+			}
 		}
-		if (m_insertRoot->getData() < m_last->getData())
+		//---------------------------------------------------
+		//gets the left
+		if (m_insertRoot->getData() < currentNode->getData())
 		{
-			TreeNode<T>* m_indexRoot = m_last;
-			while (m_indexRoot->getLeft() != nullptr)
+			if (currentNode->hasLeft()) 
 			{
-				m_indexRoot = m_indexRoot->getLeft();
-				if (m_insertRoot->getData() > m_indexRoot->getData())
-				{
-					m_last = m_indexRoot;
-					insert(value);
-				}
+				currentNode = currentNode->getLeft();
 			}
-			m_indexRoot->setLeft(m_insertRoot);
-			m_last = m_insertRoot;
-		}
-	}
-	//------------------------------------------------
-	if (m_insertRoot->getData() < m_root->getData())
-	{
-		if (m_insertRoot->getData() > m_last->getData())
-		{
-			TreeNode<T>* m_indexRoot = m_last;
-			while (m_indexRoot->getRight() != nullptr)
+			else 
 			{
-				m_indexRoot = m_indexRoot->getRight();
-				if (m_insertRoot->getData() < m_indexRoot->getData())
-				{
-					m_last = m_indexRoot;
-					insert(value);
-				}
+				currentNode->setLeft(m_insertRoot);
+				return;
 			}
-			m_indexRoot->setRight(m_insertRoot);
-			m_last = m_insertRoot;
 		}
-		if (m_insertRoot->getData() < m_last->getData())
-		{
-			TreeNode<T>* m_indexRoot = m_last;
-			while (m_indexRoot->getLeft() != nullptr)
-			{
-				m_indexRoot = m_indexRoot->getLeft();
-				if (m_insertRoot->getData() > m_indexRoot->getData())
-				{
-					m_last = m_indexRoot;
-					insert(value);
-				}
-			}
-			m_indexRoot->setLeft(m_insertRoot);
-			m_last = m_insertRoot;
-		}
+		//---------------------------------------------------
+		if (newNode->getData() == currentNode->getData())
+			return;
 	}
 };
 
