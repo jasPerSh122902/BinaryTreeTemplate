@@ -199,7 +199,7 @@ inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, Tree
 		}//-------------------------------------
 
 		//searches the left----------------------------------
-		if (searchValue < currentNode->getData())
+		else if (searchValue < currentNode->getData())
 		{
 			//if current has a left
 			if (currentNode->hasLeft())
@@ -306,7 +306,7 @@ inline void BinaryTree<T>::remove(T value)
 						//make the parent into the parents left
 						currentParent = currentParent->getLeft();
 						//turen seaching to false
-						return;
+						searching = false;
 					}
 
 				}
@@ -318,7 +318,23 @@ inline void BinaryTree<T>::remove(T value)
 			currentParent->setLeft(currentNode->getRight());
 			//delete the currentNode
 			delete currentNode;
+
 		}
+		else {
+			//Set the node to remove's data to be the current node's data
+			nodeRemove->setData(currentNode->getData());
+
+			//If the current node has a right
+			if (currentNode->hasRight()) {
+				//sets the remove's right to be the current node's right
+				nodeRemove->setRight(currentNode->getRight());
+			}
+			//Otherwise, set the node to remove's right to be nullptr
+			else nodeRemove->setRight(nullptr);
+			//Deletes the current node
+			delete currentNode;
+		}
+		
 	}//------------------------------------------------------------------------------------------
 	//this is the node has a left-------------------------------------------------------
 	else
