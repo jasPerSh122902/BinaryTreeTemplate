@@ -177,8 +177,8 @@ template<typename T>
 inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, TreeNode<T>*& nodeParent)
 {
 	bool search = true;
-	TreeNode<T>* currentNode = find(searchValue);
-	TreeNode<T>* currentParent = nullptr;
+	TreeNode<T>* currentNode = m_root;
+	TreeNode<T>* currentParent = m_root;
 	while (search)
 	{
 		//searches the right side---------------
@@ -191,8 +191,11 @@ inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, Tree
 				currentParent = currentNode;
 				currentNode = currentParent->getRight();//and mkakes the current Node into the current parents right.
 			}//that is to move the currentNode right because this if loop is meant to move right.
-			else
+			else 
+			{
 				break;
+			}
+				
 		}//-------------------------------------
 
 		//searches the left----------------------------------
@@ -204,23 +207,27 @@ inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, Tree
 				currentParent = currentNode;
 				currentNode = currentParent->getLeft();//and mkakes the current Node into the current parents left.
 			}//that is to move the currentNode left because this if loop is meant to move left.
-			else
+			else 
+			{
 				break;
+			}
 		}//----------------------------------------------
 
 		//This is if the value is the current Node 
-		else if (searchValue == currentNode->getData())
+		else if(searchValue == currentNode->getData())
 		{
-			currentParent = currentNode;
 			nodeFound = currentNode;//makes found so current node
 
 			if (currentParent->getData() == nodeFound->getData())//makes the current parents data to the found data
 			{
 				//makes paranent null
-				nodeParent = nullptr;
+				nodeParent == nullptr;
 			}
-			else//and makes the current parent bakc  to null
+			else 
+			{
+				//and makes the current parent bakc  to null
 				nodeParent = currentParent;
+			}
 			return true;//then return that it was succsseful
 		}
 	}
