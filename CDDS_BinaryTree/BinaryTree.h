@@ -48,7 +48,6 @@ private:
 	void draw(TreeNode<T> * currentNode, int x, int y, int horizontalSpacing, TreeNode<T> * selected = nullptr);
 		
 	TreeNode<T>* m_root = nullptr;
-	TreeNode<T>* m_last;
 };
 
 #endif
@@ -57,7 +56,6 @@ template<typename T>
 inline BinaryTree<T>::BinaryTree()
 {
 	m_root = nullptr;
-	m_last = nullptr;
 }
 
 template<typename T>
