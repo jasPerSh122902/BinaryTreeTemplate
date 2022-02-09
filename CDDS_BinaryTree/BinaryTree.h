@@ -75,7 +75,6 @@ inline bool BinaryTree<T>::isEmpty() const
 	return false;//...if not false
 }
 
-
 template<typename T>
 inline void BinaryTree<T>::insert(T value)
 {
@@ -167,7 +166,6 @@ inline TreeNode<T>* BinaryTree<T>::find(T value)
 	//if a fail happens return NULL.
 	return NULL;
 }
-
 
 template<typename T>
 inline void BinaryTree<T>::draw(TreeNode<T>* selected)
