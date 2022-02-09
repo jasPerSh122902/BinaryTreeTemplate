@@ -297,7 +297,7 @@ inline void BinaryTree<T>::remove(T value)
 						//make the parent into the parents left
 						currentParent = currentParent->getLeft();
 						//turen seaching to false
-						searching = false;
+						return;
 					}
 
 				}

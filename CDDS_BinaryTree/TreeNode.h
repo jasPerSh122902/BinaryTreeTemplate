@@ -3,7 +3,7 @@ template<typename T>
 class TreeNode
 {
 public:
-	TreeNode();
+	TreeNode() {};
 	TreeNode(T value);
 	~TreeNode() {};
 
@@ -58,13 +58,6 @@ private:
 };
 
 template<typename T>
-inline TreeNode<T>::TreeNode()
-{
-	m_left = nullptr;
-	m_right = nullptr;
-}
-
-template<typename T>
 inline TreeNode<T>::TreeNode(T value)
 {
 	m_value = value;
@@ -76,59 +69,56 @@ template<typename T>
 inline bool TreeNode<T>::hasLeft()
 {
 	//if left is not nullptr
-	if (m_left != nullptr)
-	{
-		return true;//then it has left
+	if (m_left) {
+		return m_left;
 	}
 	else
-		return false;//dos not have left
+		return NULL;
 }
 
 template<typename T>
 inline bool TreeNode<T>::hasRight()
 {
 	//if right is not nullptr
-	if (m_right != nullptr)
-	{
-		return true;//then it has a right
+	if (m_right) {
+		return m_right;
 	}
 	else
-		return false;//dos not have right
+		return NULL;
 }
 
 template<typename T>
 inline T TreeNode<T>::getData()
 {
 	//if the value is not null
-	if (m_value != NULL)
-		return m_value;//return that value
-	else
-		return m_value;//return eny ways
+	if (m_value) 
+	{
+		return m_value;
+	} 
+	else 
+		return NULL;
 }
 
 template<typename T>
 inline TreeNode<T>* TreeNode<T>::getLeft()
 {
 	//if the m_left is null
-	if (m_left == NULL)
+	if (hasLeft())
 	{
-		return m_left;//fill the left with the value
+		return m_left;
 	}
 	else
-		return m_left;//is the left dos have a value return left
+		return NULL;
 }
 
 template<typename T>
 inline TreeNode<T>* TreeNode<T>::getRight()
 {
 	//if the m_right is null
-	if (m_right == NULL)
-	{
-		//fill the right with the value
+	if (hasRight()) {
 		return m_right;
 	}
-	else
-		return m_right;//is the right dos have a value return right
+	else return NULL;
 }
 
 template<typename T>
