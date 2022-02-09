@@ -133,23 +133,25 @@ inline TreeNode<T>* BinaryTree<T>::find(T value)
 	//gets the m_roots data and makes it i then compares i to the value.
 	if (m_root->getData() > value) 
 	{
-		for (T i = m_root->getData(); i != value; m_root->getLeft())
+		for (T i = m_root->getData(); i != value;)
 		{
 			if (i == value)//if i is value then... 
 			{
 				return  (TreeNode<T>*) value;//...return value
 			}
+			m_root = m_root->getLeft();
 		}
 	}
 
 	else if (m_root->getData() < value)
 	{
-		for (T i = m_root->getData(); i != value; m_root->getRight())
+		for (T i = m_root->getData(); i != value;)
 		{
 			if (i == value)//if i is value then... 
 			{
 				return  (TreeNode<T>*) value;//...return value
 			}
+			m_root = m_root->getRight();
 		}
 	}
 	return  (TreeNode<T>*) value;
