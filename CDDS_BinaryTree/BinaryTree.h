@@ -66,8 +66,12 @@ template<typename T>
 inline bool BinaryTree<T>::isEmpty() const
 {
 	//if m_roots left and right are nullptr which is null...
-	if (m_root->getLeft() && m_root->getRight() == nullptr)
+	if (m_root == nullptr)
 		return true;//...return true
+	if (m_root->hasLeft() = false)
+		return true;
+	if (m_root->hasRight() = false)
+		return true;
 	return false;//...if not false
 }
 
@@ -76,12 +80,13 @@ template<typename T>
 inline void BinaryTree<T>::insert(T value)
 {	
 	TreeNode<T>* m_insertRoot = new TreeNode<T>(value);
-
+	//just for the start were there is no Nodes
 	if (m_root == nullptr)
 	{
+		//set root to the insertRoot
 		m_root = m_insertRoot;
 	}
-
+	//made veriables
 	bool beginSort = true;
 	TreeNode<T>* currentNode = m_root;
 
@@ -90,33 +95,41 @@ inline void BinaryTree<T>::insert(T value)
 		//gets the right side-----------------------------------
 		if (m_insertRoot->getData() > currentNode->getData())
 		{
+			//checks if the current node has right
 			if (currentNode->hasRight())
 			{
+				//makes the currentNode into the right
 				currentNode = currentNode->getRight();
 			}
+			//if the node dos not have a right
 			else 
 			{
+				//set the right to the m_insertRoot
 				currentNode->setRight(m_insertRoot);
-				return;
+				beginSort = false;//set sorting to false to break out of loop
 			}
 		}
 		//---------------------------------------------------
 		//gets the left
 		if (m_insertRoot->getData() < currentNode->getData())
 		{
+			//checks if the current node has left
 			if (currentNode->hasLeft()) 
 			{
+				//makes the currentNode into the left
 				currentNode = currentNode->getLeft();
 			}
+			//if the node dos not have a left
 			else 
 			{
+				//set the right to the m_insertRoot
 				 currentNode->setLeft(m_insertRoot);
-				 return;
+				 beginSort = false;//set sorting to false to break out of loop
 			}
 		}
 		//---------------------------------------------------
 		if (m_insertRoot->getData() == currentNode->getData())
-			return ;
+			beginSort = false;
 	}
 };
 
@@ -124,7 +137,48 @@ inline void BinaryTree<T>::insert(T value)
 template<typename T>
 inline void BinaryTree<T>::remove(T value)
 {
+	//pointer to nodes that are NPR
+	TreeNode<T>* currentNode = nullptr;
+	TreeNode<T>* nodeRemove = nullptr;
+	TreeNode<T>* currentParent = nullptr;
 
+	if (!findNode(value, nodeRemove, currentParent))
+		return;
+
+	bool searching = true;
+	while (searching)
+	{
+		if (m_root != NULL)
+		{
+			//searches the right
+			if (value > currentNode->getData())
+			{
+				//Checks to see if you have right and makes sure it ture not false
+				if (currentNode->hasRight() == true)
+				{
+					//make the current node into the right
+					currentNode = currentNode->getRight();
+					 delete currentNode;
+					 
+
+				}
+				else break;
+			}
+			//searches the left side
+			else if (value < currentNode->getData() == true)
+			{
+				if (currentNode->hasLeft())
+				{
+					currentNode = currentNode->getLeft();
+					delete currentNode;
+					
+				}
+				else break;
+			}
+			else if (value == currentNode->getData() == true)
+				delete currentNode;
+		}
+	}
 }
 
 template<typename T>
@@ -135,55 +189,90 @@ inline TreeNode<T>* BinaryTree<T>::find(T value)
 
 	while (searching)
 	{
-		//searches the right
-		if (value > currentNode->getData()) 
+		//searches the right-----------------------
+		if (value > currentNode->getData())
 		{
+			//if the current has a right
 			if (currentNode->hasRight())
-				currentNode = currentNode->getRight();
-			else break;
-		}
-		//searches the left side
+				currentNode = currentNode->getRight();//make the current node in to the right
+			else
+				break;
+		}//-------------------------------------------
+		//searches the left side-----------------------
 		else if (value < currentNode->getData())
 		{
+			//if the current has a left
 			if (currentNode->hasLeft())
-				currentNode = currentNode->getLeft();
-			else break;
-		}
+				currentNode = currentNode->getLeft();//make the current node in to the left
+			else 
+				break;
+		}//-------------------------------------------
+		//if the value is the currentNodes data
 		else if (value == currentNode->getData())
-			return currentNode;
+			return currentNode;//return you dont need to do any thing
 	}
+	//if a fail happens return NULL.
 	return NULL;
 }
 
-//this needs to be worked on
+
 template<typename T>
 inline void BinaryTree<T>::draw(TreeNode<T>* selected)
 {
 	draw(m_root, 400, 40, 400, selected);
 }
 
-//this needs to be worked on
 template<typename T>
 inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, TreeNode<T>*& nodeParent)
 {
-	while (searchValue != nodeFound->getData())
+	bool search = true;
+	TreeNode<T>* currentNode = nullptr;
+	TreeNode<T>* currentParent = nullptr;
+	while (search)
 	{
-		if (searchValue > nodeFound->getData()) {
-			nodeFound->getLeft();
-			nodeParent = nodeFound;
-			nodeFound = nodeParent->getLeft();
-		}
-		if (searchValue < nodeFound->getData()) {
-			nodeFound->getRight();
-			nodeParent = nodeFound;
-			nodeFound = nodeParent->getRight();
-		}
-		else if (searchValue == nodeFound->getData()) 
+		//searches the right side---------------
+		if (searchValue > currentNode->getData())
 		{
-			nodeParent->getLeft()->getData() = nodeFound->getData();
-			searchValue == nodeFound->getData();
+			//check to see if the current has a right
+			if (currentNode->hasRight()) 
+			{
+				//makes parent into current Node
+				currentParent = currentNode;
+				currentNode = currentParent->getRight();//and mkakes the current Node into the current parents right.
+			}//that is to move the currentNode right because this if loop is meant to move right.
+			else
+				break;
+		}//-------------------------------------
+		
+		//searches the left----------------------------------
+		if (searchValue < currentNode->getData())
+		{
+			//if current has a left
+			if (currentNode->hasLeft())
+			{
+				currentParent = currentNode;
+				currentNode = currentParent->getLeft();//and mkakes the current Node into the current parents left.
+			}//that is to move the currentNode left because this if loop is meant to move left.
+			else
+				break;
+		}//----------------------------------------------
+		
+		//This is if the value is the current Node 
+		else if (searchValue == currentNode->getData())
+		{
+			nodeFound = currentNode;//makes found so current node
+			if (currentParent->getData() == nodeFound->getData())//makes the current parents data to the found data
+			{
+				//makes paranent null
+				nodeParent = nullptr;
+			}
+			else//and makes the current parent bakc  to null
+				nodeParent = currentParent;
+			return true;//then return that it was succsseful
 		}
 	}
+	//if it failes then return false
+	return false;
 }
 
 template<typename T>
@@ -192,25 +281,27 @@ inline void BinaryTree<T>::draw(TreeNode<T>* currentNode, int x, int y, int hori
 	//Decrease the horizontal space as the nodes draw
 	horizontalSpacing /= 2;
 
-	//check if the current node is null
-	if (currentNode) 
+	//Check if the current node is null
+	if (currentNode)
 	{
 		//Draws the left child if this node has one
 		if (currentNode->hasLeft())
 		{
-			//Draws a line between th left child and the current node
+			//Draws a line between the left child and the current node
 			DrawLine(x, y, x - horizontalSpacing, y + 80, RED);
 			//Draws the left child
 			draw(currentNode->getLeft(), x - horizontalSpacing, y + 80, horizontalSpacing, selected);
 		}
-		//Draws the Right child if this node has one
+
+		//Draws the right child if this node has one
 		if (currentNode->hasRight())
 		{
-			//Draws a line between th left child and the current node
-			DrawLine(x, y, x - horizontalSpacing, y + 80, RED);
-			//Draws the Right child
-			draw(currentNode->getRight(), x - horizontalSpacing, y + 80, horizontalSpacing, selected);
+			//Draws a line between this child and the current node
+			DrawLine(x, y, x + horizontalSpacing, y + 80, RED);
+			//Draws the right child
+			draw(currentNode->getRight(), x + horizontalSpacing, y + 80, horizontalSpacing, selected);
 		}
-		currentNode->draw(x,y, (selected == currentNode));
+		//Draws the current node
+		currentNode->draw(x, y, (selected == currentNode));
 	}
 }

@@ -61,7 +61,7 @@ template<typename T>
 inline TreeNode<T>::TreeNode()
 {
 	m_left = nullptr;
-	m_right= nullptr;
+	m_right = nullptr;
 }
 
 template<typename T>
@@ -75,51 +75,60 @@ inline TreeNode<T>::TreeNode(T value)
 template<typename T>
 inline bool TreeNode<T>::hasLeft()
 {
+	//if left is not nullptr
 	if (m_left != nullptr)
 	{
-		return true;
+		return true;//then it has left
 	}
 	else
-		return false;
+		return false;//dos not have left
 }
 
 template<typename T>
 inline bool TreeNode<T>::hasRight()
 {
+	//if right is not nullptr
 	if (m_right != nullptr)
 	{
-		return true;
+		return true;//then it has a right
 	}
 	else
-		return false;
+		return false;//dos not have right
 }
 
 template<typename T>
 inline T TreeNode<T>::getData()
 { 
-	/*if (m_value = NULL)
-		return m_value;
-	else
-		return m_value;*/
-
+	//if the value is not null
 	if (m_value != NULL)
-		return m_value;
+		return m_value;//return that value
 	else
-		return m_value;
+		return m_value;//return eny ways
 }
 
 template<typename T>
 inline TreeNode<T>* TreeNode<T>::getLeft()
 {
-	if (hasLeft() == false) return m_left;
-	else return NULL;
+	//if the m_left is null
+	if (m_left == NULL)
+	{
+		return m_left;//fill the left with the value
+	}
+	else 
+		return m_left;//is the left dos have a value return left
 }
 
 template<typename T>
 inline TreeNode<T>* TreeNode<T>::getRight() 
 {
-	if (hasRight() == false) return m_right;
-	else return NULL;
+	//if the m_right is null
+	if (m_right == NULL)
+	{
+		//fill the right with the value
+		return m_right;
+	}
+	else
+		return m_right;//is the right dos have a value return right
 }
 
 template<typename T>
@@ -148,11 +157,12 @@ inline void TreeNode<T>::draw(int x, int y, bool selected)
 	static char buffer[10];
 
 	//Converts the value to a string and stores it in the array
-	sprintf(buffer, "%d",m_value);
-	//draws the circle to represent the node
+	sprintf(buffer, "%d", m_value);
+
+	//Draws the circle to represent the node
 	DrawCircle(x, y, 30, YELLOW);
 
-	//if the node is the current selected node change its color
+	//If the the node is the current selected node change its color.
 	if (selected)
 		DrawCircle(x, y, 28, GREEN);
 	else
