@@ -110,13 +110,13 @@ inline void BinaryTree<T>::insert(T value)
 			}
 			else 
 			{
-				currentNode->setLeft(m_insertRoot);
-				return;
+				 currentNode->setLeft(m_insertRoot);
+				 return;
 			}
 		}
 		//---------------------------------------------------
-		if (newNode->getData() == currentNode->getData())
-			return;
+		if (m_insertRoot->getData() == currentNode->getData())
+			return ;
 	}
 };
 
@@ -130,31 +130,29 @@ inline void BinaryTree<T>::remove(T value)
 template<typename T>
 inline TreeNode<T>* BinaryTree<T>::find(T value)
 {
-	//gets the m_roots data and makes it i then compares i to the value.
-	if (m_root->getData() > value) 
-	{
-		for (T i = m_root->getData(); i != value;)
-		{
-			if (i == value)//if i is value then... 
-			{
-				return  (TreeNode<T>*) value;//...return value
-			}
-			m_root = m_root->getLeft();
-		}
-	}
+	bool searching = true;
+	TreeNode<T>* currentNode = m_root;
 
-	else if (m_root->getData() < value)
+	while (searching)
 	{
-		for (T i = m_root->getData(); i != value;)
+		//searches the right
+		if (value > currentNode->getData()) 
 		{
-			if (i == value)//if i is value then... 
-			{
-				return  (TreeNode<T>*) value;//...return value
-			}
-			m_root = m_root->getRight();
+			if (currentNode->hasRight())
+				currentNode = currentNode->getRight();
+			else break;
 		}
+		//searches the left side
+		else if (value < currentNode->getData())
+		{
+			if (currentNode->hasLeft())
+				currentNode = currentNode->getLeft();
+			else break;
+		}
+		else if (value == currentNode->getData())
+			return currentNode;
 	}
-	return  (TreeNode<T>*) value;
+	return NULL;
 }
 
 //this needs to be worked on
