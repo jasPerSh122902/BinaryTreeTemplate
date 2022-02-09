@@ -133,54 +133,6 @@ inline void BinaryTree<T>::insert(T value)
 	}
 };
 
-
-template<typename T>
-inline void BinaryTree<T>::remove(T value)
-{
-	//pointer to nodes that are NPR
-	TreeNode<T>* currentNode = nullptr;
-	TreeNode<T>* nodeRemove = nullptr;
-	TreeNode<T>* currentParent = nullptr;
-
-	if (!findNode(value, nodeRemove, currentParent))
-		return;
-
-	bool searching = true;
-	while (searching)
-	{
-		if (m_root != NULL)
-		{
-			//searches the right
-			if (value > currentNode->getData())
-			{
-				//Checks to see if you have right and makes sure it ture not false
-				if (currentNode->hasRight() == true)
-				{
-					//make the current node into the right
-					currentNode = currentNode->getRight();
-					 delete currentNode;
-					 
-
-				}
-				else break;
-			}
-			//searches the left side
-			else if (value < currentNode->getData() == true)
-			{
-				if (currentNode->hasLeft())
-				{
-					currentNode = currentNode->getLeft();
-					delete currentNode;
-					
-				}
-				else break;
-			}
-			else if (value == currentNode->getData() == true)
-				delete currentNode;
-		}
-	}
-}
-
 template<typename T>
 inline TreeNode<T>* BinaryTree<T>::find(T value)
 {
@@ -303,5 +255,52 @@ inline void BinaryTree<T>::draw(TreeNode<T>* currentNode, int x, int y, int hori
 		}
 		//Draws the current node
 		currentNode->draw(x, y, (selected == currentNode));
+	}
+}
+
+template<typename T>
+inline void BinaryTree<T>::remove(T value)
+{
+	//pointer to nodes that are NPR
+	TreeNode<T>* currentNode = nullptr;
+	TreeNode<T>* nodeRemove = nullptr;
+	TreeNode<T>* currentParent = nullptr;
+
+	if (!findNode(value, nodeRemove, currentParent))
+		return;
+
+	bool searching = true;
+	while (searching)
+	{
+		if (m_root != NULL)
+		{
+			//searches the right
+			if (value > currentNode->getData())
+			{
+				//Checks to see if you have right and makes sure it ture not false
+				if (currentNode->hasRight() == true)
+				{
+					//make the current node into the right
+					currentNode = currentNode->getRight();
+					delete currentNode;
+
+
+				}
+				else break;
+			}
+			//searches the left side
+			else if (value < currentNode->getData() == true)
+			{
+				if (currentNode->hasLeft())
+				{
+					currentNode = currentNode->getLeft();
+					delete currentNode;
+
+				}
+				else break;
+			}
+			else if (value == currentNode->getData() == true)
+				delete currentNode;
+		}
 	}
 }
