@@ -177,7 +177,7 @@ template<typename T>
 inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, TreeNode<T>*& nodeParent)
 {
 	bool search = true;
-	TreeNode<T>* currentNode = nullptr;
+	TreeNode<T>* currentNode = find(searchValue);
 	TreeNode<T>* currentParent = nullptr;
 	while (search)
 	{
@@ -211,7 +211,9 @@ inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, Tree
 		//This is if the value is the current Node 
 		else if (searchValue == currentNode->getData())
 		{
+			currentParent = currentNode;
 			nodeFound = currentNode;//makes found so current node
+
 			if (currentParent->getData() == nodeFound->getData())//makes the current parents data to the found data
 			{
 				//makes paranent null
