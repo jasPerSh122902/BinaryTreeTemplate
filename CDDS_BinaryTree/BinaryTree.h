@@ -304,7 +304,7 @@ inline void BinaryTree<T>::remove(T value)
 					else
 					{
 						//make the parent into the parents left
-						currentParent = currentParent->getLeft();
+						currentNode = currentParent->getLeft();
 						//turen seaching to false
 						searching = false;
 					}
@@ -358,6 +358,15 @@ inline void BinaryTree<T>::remove(T value)
 				//delete node remove
 				delete nodeRemove;
 				return;
+			}
+			else 
+			{
+				if (currentParent->getLeft() == nodeRemove)
+					currentParent->setLeft(nullptr);
+				else if (currentParent->getRight() == nodeRemove)
+					currentParent->setRight(nullptr);
+
+				else nodeRemove;
 			}
 		}
 		//if the node dos not have a parent
