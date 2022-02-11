@@ -81,10 +81,8 @@ inline void BinaryTree<T>::insert(T value)
 	TreeNode<T>* m_insertRoot = new TreeNode<T>(value);
 	//just for the start were there is no Nodes
 	if (m_root == nullptr)
-	{
-		//set root to the insertRoot
-		m_root = m_insertRoot;
-	}
+		m_root = m_insertRoot;//set root to the insertRoot
+	
 	//made veriables
 	bool beginSort = true;
 	TreeNode<T>* currentNode = m_root;
