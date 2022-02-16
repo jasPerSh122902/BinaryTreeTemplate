@@ -1,13 +1,21 @@
-#BinaryTree
+# BinaryTree
+# **Introduction**
+This program is meant to be a test to make and work with the idea of a binary tree. The data stuctor was assigned to me to successfuly creat a project that demonstrates a binary tree. And I had to pass these points to complete the task.
 
-This program is meant to be a test to make and work with the idea of a binary tree
-
+    * The created program must maintain an ordered tree
+    * The created program demonstraes insertion and removal of nodes
+    * The created progream allows the user to earch for a calue in the tree
+    * The created progream uses a thir-party library
+Project submitted as an executable binary file that can be run externam to an IDE.
+The sorce code and project files are submitted for review.
 
 $File$ : _BinaryTree.h_
 
 $Type$ : Tempate T
 
-The Nodes hold information that can be pointers or eny viables
+The Nodes hold information that can be pointers or eny viables 
+    
+# **Desgin**
 
 $Name$ :  BinaryTree()
 + Description : Is a baic contructor for the BinaryTree class.
