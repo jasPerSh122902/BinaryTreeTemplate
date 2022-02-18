@@ -82,7 +82,7 @@ inline void BinaryTree<T>::insert(T value)
 	//just for the start were there is no Nodes
 	if (m_root == nullptr)
 		m_root = m_insertRoot;//set root to the insertRoot
-	
+
 	//made veriables
 	bool beginSort = true;
 	TreeNode<T>* currentNode = m_root;
@@ -189,11 +189,11 @@ inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, Tree
 				currentParent = currentNode;
 				currentNode = currentParent->getRight();//and mkakes the current Node into the current parents right.
 			}//that is to move the currentNode right because this if loop is meant to move right.
-			else 
+			else
 			{
 				break;
 			}
-				
+
 		}//-------------------------------------
 
 		//searches the left----------------------------------
@@ -205,14 +205,14 @@ inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, Tree
 				currentParent = currentNode;
 				currentNode = currentParent->getLeft();//and mkakes the current Node into the current parents left.
 			}//that is to move the currentNode left because this if loop is meant to move left.
-			else 
+			else
 			{
 				break;
 			}
 		}//----------------------------------------------
 
 		//This is if the value is the current Node 
-		else if(searchValue == currentNode->getData())
+		else if (searchValue == currentNode->getData())
 		{
 			nodeFound = currentNode;//makes found so current node
 
@@ -221,7 +221,7 @@ inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, Tree
 				//makes paranent null
 				nodeParent == nullptr;
 			}
-			else 
+			else
 			{
 				//and makes the current parent bakc  to null
 				nodeParent = currentParent;
@@ -332,7 +332,7 @@ inline void BinaryTree<T>::remove(T value)
 			//Deletes the current node
 			delete currentNode;
 		}
-		
+
 	}//------------------------------------------------------------------------------------------
 	//this is the node has a left-------------------------------------------------------
 	else
@@ -341,7 +341,7 @@ inline void BinaryTree<T>::remove(T value)
 		if (currentParent)
 		{
 			//the remove has a left
-			if (nodeRemove->hasLeft()) 
+			if (nodeRemove->hasLeft())
 			{
 				//make the currentNode to the node removes left
 				currentNode = nodeRemove->getLeft();
@@ -357,7 +357,7 @@ inline void BinaryTree<T>::remove(T value)
 				delete nodeRemove;
 				return;
 			}
-			else 
+			else
 			{
 				if (currentParent->getLeft() == nodeRemove)
 					currentParent->setLeft(nullptr);

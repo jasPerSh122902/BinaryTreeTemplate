@@ -69,9 +69,9 @@ template<typename T>
 inline bool TreeNode<T>::hasLeft()
 {
 	//if left is not nullptr
-	if (m_left) 
+	if (m_left)
 		return m_left;
-	
+
 	else
 		return NULL;
 }
@@ -80,7 +80,7 @@ template<typename T>
 inline bool TreeNode<T>::hasRight()
 {
 	//if right is not nullptr
-	if (m_right) 
+	if (m_right)
 		return m_right;
 	else
 		return NULL;
@@ -90,10 +90,10 @@ template<typename T>
 inline T TreeNode<T>::getData()
 {
 	//if the value is not null
-	if (m_value) 
+	if (m_value)
 		return m_value;
-	
-	else 
+
+	else
 		return NULL;
 }
 
@@ -113,10 +113,10 @@ template<typename T>
 inline TreeNode<T>* TreeNode<T>::getRight()
 {
 	//if the m_right is null
-	if (hasRight()) 
+	if (hasRight())
 		return m_right;
-	
-	else 
+
+	else
 		return NULL;
 }
 
