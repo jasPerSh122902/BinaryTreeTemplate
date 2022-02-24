@@ -60,7 +60,10 @@ inline BinaryTree<T>::BinaryTree()
 
 template<typename T>
 inline BinaryTree<T>::~BinaryTree()
-{}
+{
+	while (m_root)
+		remove(m_root->getData());
+}
 
 template<typename T>
 inline bool BinaryTree<T>::isEmpty() const
@@ -146,7 +149,7 @@ inline TreeNode<T>* BinaryTree<T>::find(T value)
 			if (currentNode->hasRight())
 				currentNode = currentNode->getRight();//make the current node in to the right
 			else
-				break;
+				searching = false;
 		}//-------------------------------------------
 		//searches the left side-----------------------
 		else if (value < currentNode->getData())
@@ -155,7 +158,7 @@ inline TreeNode<T>* BinaryTree<T>::find(T value)
 			if (currentNode->hasLeft())
 				currentNode = currentNode->getLeft();//make the current node in to the left
 			else
-				break;
+				searching = false;
 		}//-------------------------------------------
 		//if the value is the currentNodes data
 		else if (value == currentNode->getData())
@@ -174,6 +177,9 @@ inline void BinaryTree<T>::draw(TreeNode<T>* selected)
 template<typename T>
 inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, TreeNode<T>*& nodeParent)
 {
+	if (m_root == nullptr)
+		return false;
+
 	bool search = true;
 	TreeNode<T>* currentNode = m_root;
 	TreeNode<T>* currentParent = m_root;
@@ -191,7 +197,7 @@ inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, Tree
 			}//that is to move the currentNode right because this if loop is meant to move right.
 			else
 			{
-				break;
+				search = false;
 			}
 
 		}//-------------------------------------
@@ -207,7 +213,7 @@ inline bool BinaryTree<T>::findNode(T searchValue, TreeNode<T>*& nodeFound, Tree
 			}//that is to move the currentNode left because this if loop is meant to move left.
 			else
 			{
-				break;
+				search = false;
 			}
 		}//----------------------------------------------
 
